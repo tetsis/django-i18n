@@ -1,0 +1,28 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{% trans "言語設定ページ" %}</title>
+    </head>
+    <body>
+        <h1 id="title">{% trans "言語設定ページ" %}</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+            <select name="language">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="{% trans "変更" %}">
+        </form>
+
+        <a href="{% url 'index' %}">{% trans "トップページに戻る" %}</a>
+
+    </body>
+</html>

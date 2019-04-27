@@ -1,0 +1,17 @@
+    {% load i18n %}
+    <!DOCTYPE html>
+    <html lang="ja">
+        <head>
+            <meta charset="utf-8">
+            <title>{% trans "Djangoのテストページ" %}</title>
+        </head>
+        <body>
+            <h1 id="title">{% trans "Djangoのテストページ" %}</h1>
+            <button type="button" onclick='alert("{% trans "こんにちは" %}")'>{% trans "ここをクリック" %}</button>
+            <br/>
+            <a href="{% url 'language' %}">{% trans "言語設定" %}</a>
+            <form action="{% url 'logout' %}">
+                <input type="submit" value="{% trans "ログアウト" %}" />
+            </form>            
+        </body>
+    </html>
