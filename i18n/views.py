@@ -16,7 +16,6 @@ def login_view(request):
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         next = request.POST.get('next', '/')
-        print(next)
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
@@ -25,7 +24,7 @@ def login_view(request):
             request.session['_language'] = language # この通信のsessionに言語を設定する
             return redirect(next)
         else:
-            return render(request, 'login.html', {'next': next, 'error': True})
+            return render(request, 'login.html', {'next': next, 'error': True}, status=401)
 
 @login_required
 def logout_view(request):
